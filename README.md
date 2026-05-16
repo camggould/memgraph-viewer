@@ -4,6 +4,19 @@ A React SPA for visualizing a [memgraph](https://github.com/camggould/memgraph)
 deployment over the REST API exposed by
 [memgraph-rest](https://github.com/camggould/memgraph-rest).
 
+> **Most users don't install this directly.** The `memgraph-rest` binary
+> bundles a pre-built copy of this viewer and serves it at `GET /`. Install
+> memgraph-rest with the one-liner and you have the viewer immediately:
+>
+> ```sh
+> curl -fsSL https://raw.githubusercontent.com/camggould/memgraph-rest/main/install.sh | sh
+> memgraph-rest serve --sqlite ~/.memgraph/store.db
+> # open http://localhost:8080
+> ```
+>
+> This repo is for **developing the viewer itself** or building a custom
+> static deploy.
+
 Sigma.js graph canvas, HeroUI components, Tanstack Query for API state, and
 a small plugin system that lets clients (`memgraph-docs`, future
 `memgraph-tasks`, etc.) render their own kinds of nodes in a domain-aware
