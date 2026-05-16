@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* Sigma canvas needs an explicitly sized container. */
+.sigma-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+/* Rendered markdown for the docs plugin */
+.prose-doc {
+  line-height: 1.55;
+}
+.prose-doc h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 1.2rem 0 0.6rem;
+}
+.prose-doc h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.1rem 0 0.5rem;
+}
+.prose-doc h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+}
+.prose-doc p {
+  margin: 0.5rem 0;
+}
+.prose-doc ul,
+.prose-doc ol {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+}
+.prose-doc ul {
+  list-style: disc;
+}
+.prose-doc ol {
+  list-style: decimal;
+}
+.prose-doc code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.9em;
+  background: rgba(127, 127, 127, 0.15);
+  padding: 0.05em 0.3em;
+  border-radius: 0.2em;
+}
+.prose-doc pre {
+  background: rgba(127, 127, 127, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 0.4rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+.prose-doc pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose-doc blockquote {
+  border-left: 3px solid rgba(127, 127, 127, 0.4);
+  padding-left: 0.75rem;
+  margin: 0.75rem 0;
+  color: rgba(127, 127, 127, 0.95);
+}
+.prose-doc hr {
+  border: 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.3);
+  margin: 1rem 0;
+}
