@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import Graph from 'graphology';
+import Graph, { MultiDirectedGraph } from 'graphology';
 import { SigmaContainer, useLoadGraph, useRegisterEvents, useSigma } from '@react-sigma/core';
 import '@react-sigma/core/lib/react-sigma.min.css';
 import { Button, Select, SelectItem } from '@heroui/react';
@@ -15,7 +15,11 @@ export interface CanvasGraph {
 }
 
 function buildGraphology(input: CanvasGraph, layout: LayoutKind, showEdgeLabels: boolean): Graph {
-  const g = new Graph({ multi: true });
+  // MultiDirectedGraph: directed (memgraph edges are from→to) AND multi (the
+  // same node pair can be linked by multiple typed edges, e.g. `cites` AND
+  // `supports`). Must match the class passed to <SigmaContainer graph={}>
+  // below — useLoadGraph imports across mismatched types and fails otherwise.
+  const g = new MultiDirectedGraph();
   const visible = new Set<string>();
   for (const n of input.nodes) {
     if (shouldHideInGraph(n)) continue;
@@ -36,7 +40,7 @@ function buildGraphology(input: CanvasGraph, layout: LayoutKind, showEdgeLabels:
     if (!visible.has(e.from_lineage) || !visible.has(e.to_lineage)) continue;
     if (g.hasEdge(e.id)) continue;
     try {
-      g.addEdgeWithKey(e.id, e.from_lineage, e.to_lineage, {
+      g.addDirectedEdgeWithKey(e.id, e.from_lineage, e.to_lineage, {
         label: showEdgeLabels ? e.kind : '',
         size: 1,
         color: '#52525b',
@@ -154,6 +158,7 @@ export function GraphCanvas({
       <div className="flex-1 relative">
         <SigmaContainer
           className="sigma-container"
+          graph={MultiDirectedGraph}
           settings={settings}
           style={{ background: 'transparent' }}
         >
